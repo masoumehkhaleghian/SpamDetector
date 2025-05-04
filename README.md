@@ -4,7 +4,7 @@ SpamDetector is a deep learning-based multilingual spam classification system. I
 
 ---
 
-## 🧠 Model Overview
+## Model Overview
 
 The model is designed to classify emails as `spam` or `ham` based on their content. It combines:
 
@@ -16,7 +16,7 @@ The model is designed to classify emails as `spam` or `ham` based on their conte
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 
@@ -32,7 +32,7 @@ The model is designed to classify emails as `spam` or `ham` based on their conte
 
 ---
 
-## 🗂️ Dataset
+## Dataset
 
 Two datasets are used:
 
@@ -43,7 +43,7 @@ All datasets are encoded dynamically using `charset_normalizer` to handle mixed-
 
 ---
 
-## ⚙️ Preprocessing Pipeline
+## Preprocessing Pipeline
 
 1. Remove punctuation from email content
 2. Normalize labels (`0`/`1` → `ham`/`spam`)
@@ -53,7 +53,7 @@ All datasets are encoded dynamically using `charset_normalizer` to handle mixed-
 
 ---
 
-## 🔨 Training Setup
+## Training Setup
 
 - Embedding layer initialized with FastText
 - Optimizer: `adam`
@@ -66,7 +66,7 @@ Model performance is logged and best model is saved to `/Model`.
 
 ---
 
-## 📊 Evaluation
+## Evaluation
 
 The model is evaluated using:
 
@@ -79,7 +79,7 @@ All metrics are visualized using `matplotlib` and `seaborn`.
 
 ---
 
-## 🚀 Inference
+## Inference
 
 To make predictions on new messages:
 
@@ -96,7 +96,7 @@ Example messages (Persian + English) are also included in the notebook for real-
 
 ---
 
-## 🧩 Requirements
+## Requirements
 
 ```bash
 python >= 3.11
@@ -115,15 +115,11 @@ pip install -r requirements.txt
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
 ```
 
 ---
 
-### ✅ GitHub Summary (description at top):
+### GitHub Summary (description at top):
 
 > A multilingual spam classification system using FastText embeddings and a hybrid LSTM-CNN model built with TensorFlow and Keras. Supports Persian + English, complete with preprocessing, training, and evaluation.
 

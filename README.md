@@ -106,9 +106,20 @@ SpamDetector/
 └── SpamDetector.ipynb
 ```
 
-## License
+## License and Assets
 
 MIT License – feel free to use and extend the project with credit.
+
+All supporting files, including:
+- Trained model weights
+- Embeddings
+- Datasets
+- Source code
+- Visualization notebooks
+
+are also available in this shared Google Drive folder:
+
+📁 [Access Full Project Files](https://drive.google.com/drive/folders/1BJVMNyYuNi48djdcKaFkHtaOwjlfx1t7?usp=sharing)
 
 ---
 

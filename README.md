@@ -106,9 +106,7 @@ SpamDetector/
 └── SpamDetector.ipynb
 ```
 
-## License and Assets
-
-MIT License – feel free to use and extend the project with credit.
+## Assets
 
 All supporting files, including:
 - Trained model weights

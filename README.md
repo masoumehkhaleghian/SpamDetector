@@ -111,13 +111,3 @@ pip install -r requirements.txt
 ```
 
 ---
-
-```
-
----
-
-### GitHub Summary (description at top):
-
-> A multilingual spam classification system using FastText embeddings and a hybrid LSTM-CNN model built with TensorFlow and Keras. Supports Persian + English, complete with preprocessing, training, and evaluation.
-
----

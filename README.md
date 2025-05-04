@@ -102,7 +102,6 @@ SpamDetector/
 │   └── FA/cc.fa.300.vec
 ├── Checkpoint/
 │   └── model_checkpoint.h5
-├── spamdetector.py
 └── SpamDetector.ipynb
 ```
 

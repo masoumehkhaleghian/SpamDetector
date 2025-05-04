@@ -1,105 +1,117 @@
 # SpamDetector
 
-SpamDetector is a deep learning-based multilingual spam classification system. It leverages both Persian and English email datasets, FastText embeddings, and a hybrid LSTM-CNN architecture built using TensorFlow/Keras.
+This repository provides a complete solution for detecting spam emails in both English and Persian (Farsi). It includes preprocessing pipelines, model architecture, training scripts, FastText embeddings, and evaluation tools.
 
----
+## Overview
 
-## Model Overview
+SpamDetector is a deep learning-based binary classifier trained to distinguish between **spam** and **ham** (non-spam) emails. It leverages a hybrid neural network architecture combining Convolutional Layers, Bi-LSTM, and Attention mechanism to learn from multilingual email data. The model uses pre-trained FastText embeddings for both English and Persian languages.
 
-The model is designed to classify emails as `spam` or `ham` based on their content. It combines:
+## Features
 
-- **Pretrained FastText Embeddings** for multilingual text understanding
-- **1D Convolution + MaxPooling** for feature extraction
-- **Bidirectional LSTM** for sequential modeling
-- **Dropout layers** for regularization
-- **Sigmoid output** for binary classification
-
----
-
-## Project Structure
-
-```
-
-.
-├── Dataset/                  # Raw and cleaned datasets
-├── FastText/                 # Pretrained .vec embeddings
-├── Checkpoint/               # Saved checkpoints (best per epoch)
-├── Model/                    # Final trained model (.h5)
-├── SpamDetector.ipynb        # Complete Jupyter notebook pipeline
-├── README.md                 # Project documentation
-
-````
-
----
+- Multilingual support (English and Persian)
+- Combined Conv1D + BiLSTM + Attention model
+- Pre-trained FastText embeddings (300-dim)
+- Custom data loader with encoding detection
+- Stratified train/test split and validation
+- F1, Precision, Recall, AUC metrics
+- Sample evaluation with real-world messages
+- Compatible with GPU (CUDA memory growth configured)
 
 ## Dataset
 
-Two datasets are used:
+The training data is composed of 5 diverse datasets combined and cleaned, including:
+- Public spam email datasets
+- Manually curated Persian spam and ham emails
+- Unified and shuffled into a single `emails.csv`
 
-- `emails.csv`: Mixed-language dataset with `"email"` and binary `spam` labels (`0` = ham, `1` = spam)
+## Model Architecture
 
----
-
-## Preprocessing Pipeline
-
-1. Remove punctuation from email content
-2. Normalize labels (`0`/`1` → `ham`/`spam`)
-3. Tokenize and convert to sequences
-4. Pad all sequences to a max length of `400`
-5. Split into train and test sets (80/20)
-
----
-
-## Training Setup
-
-- Embedding layer initialized with FastText
-- Optimizer: `adam`
-- Loss function: `binary_crossentropy`
-- Epochs: 20 (with checkpoints)
-- Max sequence length: 400
-- Batch size: 128
-
-Model performance is logged and best model is saved to `/Model`.
-
----
-
-## Evaluation
-
-The model is evaluated using:
-
-- **Accuracy**
-- **F1-score**
-- **Confusion Matrix**
-- **Classification Report (precision, recall)**
-
-All metrics are visualized using `matplotlib` and `seaborn`.
-
----
-
-## Inference
-
-To make predictions on new messages:
-
-```python
-# Preprocess new emails
-prepared_df, X, tokenizer, vocab_size = prepare_spam_data(sample_emails, sample_labels, tokenizer)
-
-# Predict
-y_pred_prob = model.predict(X)
-y_pred = (y_pred_prob > 0.5).astype("int32")
-````
-
-Example messages (Persian + English) are also included in the notebook for real-world testing.
-
----
+```
+Input → Embedding (FastText)
+      → Conv1D + MaxPooling + Dropout
+      → BiLSTM (return_sequences=True)
+      → Attention + GlobalMaxPooling
+      → Dense + BatchNorm + Dropout
+      → Output (Sigmoid)
+```
 
 ## Requirements
 
-```bash
-python >= 3.11
-tensorflow >= 2.14
-keras >= 2.14
-pandas, numpy, seaborn
-charset-normalizer
-scikit-learn
+- Python 3.11
+- TensorFlow ≥ 2.12
+- Keras
+- NumPy, pandas, seaborn, scikit-learn
+- FastText vectors for EN and FA
+- Jupyter or Colab for running the notebook
+
+## Usage
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/masoumehkhaleghian/SpamDetector.git
+   cd SpamDetector
+   ```
+
+2. Organize your files:
+   - Store your combined dataset at: `Dataset/emails.csv`
+   - Place FastText `.vec` files at:
+     ```
+     FastText/
+     ├── EN/cc.en.300.vec
+     └── FA/cc.fa.300.vec
+     ```
+   - Save best model weights under: `Checkpoint/model_checkpoint.h5`
+
+3. Run training:
+   Use the Colab notebook or Python script to train your model. Early stopping and checkpointing are already integrated.
+
+4. Run predictions:
+   Use the utility function `prepare_spam_data()` to preprocess your text and feed it into the model:
+   ```python
+   X, y = prepare_spam_data(sample_emails, sample_labels, tokenizer)
+   y_pred = (model.predict(X) > 0.5).astype("int32")
+   ```
+
+## Evaluation
+
+Model evaluation includes:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion matrix visualization
+
+These metrics are computed on both test datasets and custom sample inputs.
+
+## Results
+
+| Metric     | Value (Test Set) |
+|------------|------------------|
+| Accuracy   | > 95%            |
+| F1-Score   | ~0.96            |
+| AUC        | ~0.98            |
+
+## File Structure
+
 ```
+SpamDetector/
+├── Dataset/
+│   └── emails.csv
+├── FastText/
+│   ├── EN/cc.en.300.vec
+│   └── FA/cc.fa.300.vec
+├── Checkpoint/
+│   └── model_checkpoint.h5
+├── spamdetector.py
+└── SpamDetector.ipynb
+```
+
+## License
+
+MIT License – feel free to use and extend the project with credit.
+
+---
+
+### Contact
+
+For questions, please reach out via GitHub Issues or email listed in the repo.

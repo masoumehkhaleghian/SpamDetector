@@ -36,10 +36,7 @@ The model is designed to classify emails as `spam` or `ham` based on their conte
 
 Two datasets are used:
 
-- `email_spam.csv`: Preprocessed dataset with `"text"` and `"type"` columns (`ham`/`spam`)
-- `emails.csv`: Mixed-language dataset with `"text"` and binary `spam` labels (`0` = ham, `1` = spam)
-
-All datasets are encoded dynamically using `charset_normalizer` to handle mixed-language characters.
+- `emails.csv`: Mixed-language dataset with `"email"` and binary `spam` labels (`0` = ham, `1` = spam)
 
 ---
 
@@ -58,9 +55,9 @@ All datasets are encoded dynamically using `charset_normalizer` to handle mixed-
 - Embedding layer initialized with FastText
 - Optimizer: `adam`
 - Loss function: `binary_crossentropy`
-- Epochs: 10 (with checkpoints)
+- Epochs: 20 (with checkpoints)
 - Max sequence length: 400
-- Batch size: 64
+- Batch size: 128
 
 Model performance is logged and best model is saved to `/Model`.
 

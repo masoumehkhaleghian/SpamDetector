@@ -103,11 +103,3 @@ pandas, numpy, seaborn
 charset-normalizer
 scikit-learn
 ```
-
-Install all dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
----
